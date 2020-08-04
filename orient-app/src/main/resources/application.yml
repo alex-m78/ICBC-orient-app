@@ -1,0 +1,36 @@
+server:
+  port: 8080
+logging:
+  level:
+    root: info
+
+
+  #      加一下下面两个配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.103.137.116:3306/testDB
+    username: test
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+  
+  kafka:
+    bootstrap-servers: 47.103.137.116:9092
+    
+    producer:
+      retries: 0
+      batch-size: 16384
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: test
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      auto-commit-interval: 100
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      
+mybatis:
+  type-aliases-package: com.orient.icbc.Bean
+  configuration:
+    map-underscore-to-camel-case: true
