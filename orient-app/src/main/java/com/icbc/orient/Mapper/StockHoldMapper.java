@@ -62,13 +62,19 @@ public interface StockHoldMapper {
      * @Author: hkd
      * @Date: 2020/7/25 13:28
      */
-    @Select("select `股票名称` stockname\n" +
-            "from train_data_fillna_1\n" +
+    @Select("SELECT name\n" +
+            "from display_prediction\n" +
             "where end_date = #{date}\n" +
-            "order by `总市值(万)_mean` desc\n" +
-            "limit 0,30;")
-    List<String> selectForName(String date);
+            "and label_new = 1\n" +
+            "limit 0,30")
+    List<String> selectForNamePre(String date);
 
+    @Select("select name\n" +
+            "from train_data_fillna_3\n" +
+            "where end_date = #{date}\n" +
+            "order by total_mv_mean desc\n" +
+            "limit 0,30;")
+    List<String> selectForNameReal(String date);
     /**
      * 功能描述:第二页第四部分显示
      * @Param: []
@@ -76,19 +82,19 @@ public interface StockHoldMapper {
      * @Author: hkd
      * @Date: 2020/7/25 12:38
      */
-    @Select("select 股票名称,ts_code,市净率_mean,净资产收益率,市盈率TTM_mean,每股净资产,ROUND(`总市值(万)_mean`,0) as tw\n" +
-            "from train_data_fillna_1\n" +
+    @Select("SELECT name,ts_code,pb_mean,roe,pe_ttm_mean,bps,total_mv_mean \n" +
+            "from display_prediction\n" +
             "where end_date = #{date}\n" +
-            "order by `总市值(万)_mean` desc\n" +
+            "and label_new = 1\n" +
             "limit 0,30")
     @Results({
-            @Result(property = "stockName",column = "股票名称"),
+            @Result(property = "stockName",column = "name"),
             @Result(property = "symbol",column = "ts_code"),
-            @Result(property = "pb",column = "市净率_mean"),
-            @Result(property = "roe",column = "净资产收益率"),
-            @Result(property = "pettm",column = "市盈率TTM_mean"),
-            @Result(property = "netAssert",column = "每股净资产"),
-            @Result(property = "totalWorth",column = "tw")
+            @Result(property = "pb",column = "pb_mean"),
+            @Result(property = "roe",column = "roe"),
+            @Result(property = "pettm",column = "pe_ttm_mean"),
+            @Result(property = "netAssert",column = "bps"),
+            @Result(property = "totalWorth",column = "total_mv_mean")
     })
     List<StockHold> selectHoldingByYearAndQuater(String date);
 
