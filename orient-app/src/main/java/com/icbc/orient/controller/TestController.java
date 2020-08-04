@@ -116,7 +116,6 @@ public class TestController {
 
     @ApiOperation("首页占比图")
     @GetMapping("/SeasonShare")
-
     public ReturnType SeasonShare() {
 
         ReturnType rt = new ReturnType();
