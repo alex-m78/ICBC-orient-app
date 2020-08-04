@@ -66,7 +66,7 @@ public class AccessDecisionService {
 
         switch (role) {
             case "admin":
-                return Arrays.asList("/UserDelete","/UserInfo","/UserRole");
+                return Arrays.asList("/userDelete","/userInfo","/userRole");
             case "user":
                 return Arrays.asList("/innerMsg");
             default:

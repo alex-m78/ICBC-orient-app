@@ -1,6 +1,15 @@
 package com.icbc.orient.Bean;
 
 public class Target {
+
+    //private String feature;
+    //private double mean1;
+    //private double std1;
+    //private double len1;
+    //private double mean2;
+    //private double std2;
+    //private double len2;
+
     private String StockType;
     private String IndexType;
     private String mean;
