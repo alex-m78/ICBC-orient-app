@@ -35,7 +35,7 @@ public class StockController {
     }
 
     @ApiOperation("基金持有数柱状图")
-    @GetMapping("/StockHolds")
+    @GetMapping("/stockHolds")
     public ReturnType getMsg(){
         ReturnType rt=new ReturnType();
         rt.setCode("200");
@@ -47,7 +47,7 @@ public class StockController {
     }
 
     @ApiOperation("预测对比表格接口")
-    @GetMapping("/ModelResults")
+    @GetMapping("/modelResults")
     public ReturnType getModelResult(int year,int quarter){
         Map<String,Object> lists  = new HashMap<>();
         ArrayList<Industry> industryDataReal = new ArrayList<Industry>();
@@ -57,12 +57,12 @@ public class StockController {
                 List<Industry> industryDataPre = inSer.selectTop10("20160630");
                 lists.put("industryDataPre",industryDataPre);
                 //第二页第二部分数据
-                industryDataReal = (ArrayList)inSer.selectTop10(year + "" + 0630);
+                industryDataReal = (ArrayList)inSer.selectTop10(year + "0630");
                 lists.put("industryDataReal",industryDataReal);
                 //第二页第三部分数据
-                List<String> compareStockData = SHSer.selectForName("20160630");
+                List<String> compareStockData = SHSer.selectForNamePre(year + "0630");
                 lists.put("predictStock",compareStockData);
-                List<String> stringList = SHSer.selectForName(year + "" + 0630);
+                List<String> stringList = SHSer.selectForNameReal(year + "0630");
                 lists.put("realStock",stringList);
                 //第二页第四部分数据
                 ArrayList arrayList = (ArrayList) SHSer.selectHoldingByYearAndQuater(year + "0630");
@@ -83,9 +83,9 @@ public class StockController {
                 industryDataReal = (ArrayList)inSer.selectTop10(year + "0930");
                 lists.put("industryDataReal",industryDataReal);
                 //第二页第三部分数据
-                List<String> compareStockData = SHSer.selectForName("20160630");
+                List<String> compareStockData = SHSer.selectForNamePre("20160630");
                 lists.put("predictStock",compareStockData);
-                List<String> stringList = SHSer.selectForName(year + "0930");
+                List<String> stringList = SHSer.selectForNameReal(year + "0930");
                 lists.put("realStock",stringList);
                 //第二页第四部分数据
                 ArrayList arrayList = (ArrayList) SHSer.selectHoldingByYearAndQuater(year + "0930");
@@ -106,9 +106,9 @@ public class StockController {
                 industryDataReal = (ArrayList)inSer.selectTop10(year + "1231");
                 lists.put("industryDataReal",industryDataReal);
                 //第二页第三部分数据
-                List<String> compareStockData = SHSer.selectForName("20160630");
+                List<String> compareStockData = SHSer.selectForNamePre("20160630");
                 lists.put("predictStock",compareStockData);
-                List<String> stringList = SHSer.selectForName(year + "1231");
+                List<String> stringList = SHSer.selectForNameReal(year + "1231");
                 lists.put("realStock",stringList);
                 //第二页第四部分数据
                 ArrayList arrayList = (ArrayList) SHSer.selectHoldingByYearAndQuater(year + "1231");

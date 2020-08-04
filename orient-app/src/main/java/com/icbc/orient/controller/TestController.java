@@ -56,7 +56,7 @@ public class TestController {
     }
 
     @ApiOperation("饼状图（上一季度新进重仓股排行前五行业）")
-    @GetMapping("/Industries")
+    @GetMapping("/industries")
     public ReturnType getIndustry() {
         List<Industry> industryList = new ArrayList<Industry>(5);
 
@@ -73,7 +73,7 @@ public class TestController {
     }
 
     @ApiOperation("重仓股超额收益率图")
-    @GetMapping("/Car")
+    @GetMapping("/car")
     public ReturnType getCar() {
         List<CAR> carList = new ArrayList<CAR>(121);
         ReturnType rt = new ReturnType();
@@ -115,7 +115,7 @@ public class TestController {
     }
 
     @ApiOperation("首页占比图")
-    @GetMapping("/SeasonShare")
+    @GetMapping("/seasonShare")
     public ReturnType SeasonShare() {
 
         ReturnType rt = new ReturnType();

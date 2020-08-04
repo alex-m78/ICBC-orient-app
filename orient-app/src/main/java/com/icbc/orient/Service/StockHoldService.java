@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 public class StockHoldService {
     @Autowired
-
     private StockHoldMapper stockHoldMapper;
 
     public List<StockHold> selectTop10() {
@@ -27,8 +26,12 @@ public class StockHoldService {
         return stockHoldMapper.selectHoldingByYearAndQuater(date);
     }
 
-    public List<String> selectForName(String date){
-        return stockHoldMapper.selectForName(date);
+    public List<String> selectForNamePre(String date){
+        return stockHoldMapper.selectForNamePre(date);
+    }
+
+    public List<String> selectForNameReal(String date){
+        return stockHoldMapper.selectForNameReal(date);
     }
 
     public List<SeasonShare> selectSeasonshare(){ return stockHoldMapper.selectSeasonShare(); }

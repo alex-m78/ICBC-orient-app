@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @ApiOperation("删除用户")
-    @GetMapping("/UserDelete")
+    @GetMapping("/userDelete")
     public ReturnType UserDelete(HttpServletRequest request) throws Exception{
         ReturnType rt = new ReturnType();
 
@@ -70,7 +70,7 @@ public class UserController {
     }
 
     @ApiOperation("修改用户权限")
-    @GetMapping("/UserRole")
+    @GetMapping("/userRole")
     public ReturnType UserRole(HttpServletRequest request) throws Exception{
         ReturnType rt = new ReturnType();
             String username=request.getParameter("username");
@@ -91,7 +91,7 @@ public class UserController {
     }
 
     @ApiOperation("展示所有用户信息")
-    @GetMapping("/UserInfo")
+    @GetMapping("/userInfo")
     public ReturnType UserInfo() throws Exception{
         ReturnType rt = new ReturnType();
         try {

@@ -27,10 +27,10 @@ public interface IndustryMapper {
      * @Author: hkd
      * @Date: 2020/7/24 20:38
      */
-    @Select("select `所属行业` industryName,count(*) as count\n" +
-            "from train_data_fillna_1\n" +
+    @Select("select industry industryName,count(*) as count\n" +
+            "from train_data_fillna_3\n" +
             "where end_date = #{date}\n" +
-            "GROUP BY `所属行业`\n" +
+            "GROUP BY industry\n" +
             "ORDER BY count DESC\n" +
             "limit 0,10;")
     List<Industry> selectTop10(String date);
