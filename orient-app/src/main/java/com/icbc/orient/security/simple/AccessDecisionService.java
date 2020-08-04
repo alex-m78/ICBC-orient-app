@@ -26,9 +26,9 @@ public class AccessDecisionService {
     public boolean hasPermission(HttpServletRequest request, Authentication auth) {
 
         //不需要登录也能访问的(permitAll)
-        for (String url : Arrays.asList("/stockHolds","/test","/industries","/car","/stockInfos",
-                "/stockHoldings","/targetCompared","/modelResults","/fiveStockInfo",
-                "/register","/seasonShare",
+        for (String url : Arrays.asList("/StockHolds","/test","/Industries","/Car","/StockInfos",
+                "/StockHoldings","/targetCompared","/ModelResults","/fiveStockInfo",
+                "/register","/SeasonShare","/feedBack",
                 "/consumerTest","/producerTest",
                 //swagger部分不需要登录，下面不需要动
                 "/swagger-ui.html","/v2/**","/swagger-resources/**","/webjars/**")) {

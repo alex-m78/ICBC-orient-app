@@ -34,7 +34,6 @@ public class StockController {
         this.inSer = inSer;
     }
 
-
     @ApiOperation("基金持有数柱状图")
     @GetMapping("/stockHolds")
     public ReturnType getMsg(){
@@ -46,9 +45,6 @@ public class StockController {
         return rt;
 
     }
-
-
-
 
     @ApiOperation("预测对比表格接口")
     @GetMapping("/modelResults")
@@ -136,7 +132,6 @@ public class StockController {
 
     }
 
-
     @ApiOperation("列表")
     @GetMapping("/targetCompared")
     public ReturnType getTarget(){
@@ -171,6 +166,7 @@ public class StockController {
         return rt;
 
     }
+
     @ApiOperation("预测的五个重仓股股价变化图（五个小框）")
     @GetMapping("/fiveStockInfo")
     public ReturnType getFiveStockInfo(){
