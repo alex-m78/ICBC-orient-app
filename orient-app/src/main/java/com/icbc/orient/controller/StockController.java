@@ -7,6 +7,7 @@ import com.icbc.orient.Service.StockHoldService;
 import com.icbc.orient.Service.TargetService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -136,7 +137,7 @@ public class StockController {
     @GetMapping("/targetCompared")
     public ReturnType getTarget(){
 
-        JSONObject object1=new JSONObject();
+        /*JSONObject object1=new JSONObject();
         object1.put("target","发展能力");
         List<String> subTarget = Arrays.asList("总资产增长率","净利润增长率","营业收入增长率");
         object1.put("subTarget",subTarget);
@@ -146,18 +147,20 @@ public class StockController {
         List<Target> nonHeavyStock = TSer.loadNonHeavyTarget();
         object1.put("heavyStock",heavyStock);
         object1.put("nonHeavyStock",nonHeavyStock);
-        List<Object> result =Arrays.asList(object1,object1);
-        //List<Object> lists  = new ArrayList<>();
-        //lists.add(object1);
-        //Map<String,Object> map1=new HashMap<>();
-        //Map<String,Object> map2=new HashMap<>();
+        List<Object> result =Arrays.asList(object1,object1);*/
+
+        JSONObject object1=new JSONObject();
+        List<Target> TotalTarget=TSer.TotalTarget();
+        //object1.put("公司规模",TotalTarget);
+        List<Target> DevelopTarget=TSer.DevelopTarget();
+        //object1.put("发展能力",DevelopTarget);
+        List<Target> ValueTarget=TSer.ValueTarget();
+        //object1.put("价值比率",ValueTarget);
+        List<Target> ProfitTarget=TSer.ProfitTarget();
+        //object1.put("盈利能力",ProfitTarget);
+        List<Object> result =Arrays.asList(TotalTarget,DevelopTarget,ValueTarget,ProfitTarget);
 
 
-        //map1.put("heavyStock",heavyStock);
-        //lists.add(map1);
-
-
-        //lists.add(map2);
         ReturnType rt=new ReturnType();
         rt.setCode("200");
         rt.setMsg("返回成功");

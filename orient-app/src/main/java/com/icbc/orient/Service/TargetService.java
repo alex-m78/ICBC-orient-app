@@ -13,11 +13,16 @@ public class TargetService {
     @Autowired
 
     public TargetMapper targetMapper;
-
+    /*
     public List<Target> loadHeavyTarget(){return targetMapper.loadHeavyTarget();};
 
     public List<Target> loadNonHeavyTarget(){return targetMapper.loadNonHeavyTarget();};
+    */
 
+    public List<Target> TotalTarget(){return targetMapper.TotalTarget();};
+    public List<Target> ProfitTarget(){return targetMapper.ProfitTarget();};
+    public List<Target> DevelopTarget(){return targetMapper.DevelopTarget();};
+    public List<Target> ValueTarget(){return targetMapper.ValueTarget();};
 
     public boolean StoreFeedback(String msg){return targetMapper.StoreFeedback(msg);};
 }
