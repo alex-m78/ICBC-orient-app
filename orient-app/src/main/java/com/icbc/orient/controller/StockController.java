@@ -27,8 +27,8 @@ public class StockController {
     private StockHoldService SHSer;
     private TargetService TSer;
     private IndustryService inSer;
-    @Autowired
-    private KafkaTemplate<Object, Object> template;
+//    @Autowired
+//    private KafkaTemplate<Object, Object> template;
 
     /**任何人都能访问
      * @return
@@ -76,8 +76,9 @@ public class StockController {
                 @Override
                 public void onCompletion(RecordMetadata metadata, Exception exception) {
                     if (exception == null) {
-                        System.out.println("success->" + metadata.offset());
+                        System.out.println("kafka数据发送成功");
                     } else {
+                        System.out.println("kafka数据发送失败");
                         exception.printStackTrace();
                     }
                 }
@@ -105,10 +106,51 @@ public class StockController {
     @GetMapping("/newModelResults")
     public ReturnType getModelResultNew(int year,int quarter){
         Map<String,Object> map = new HashMap<>();
+        Properties prop = new Properties();
+        prop.put("bootstrap.servers", "47.103.137.116:9092");//kafka集群，broker-list
+        prop.put("acks", "all");
+        prop.put("retries", 1);//重试次数
+        prop.put("batch.size", 16384);//批次大小
+        prop.put("linger.ms", 1);//等待时间
+        prop.put("buffer.memory", 33554432);//RecordAccumulator缓冲区大小
+        prop.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        prop.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+
+        Producer<String, String> producer = new KafkaProducer<>(prop);
+
+        Properties props = new Properties();
+        props.put("bootstrap.servers", "47.103.137.116:9092");
+        props.put("group.id", "test");//消费者组，只要group.id相同，就属于同一个消费者组
+        props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        consumer.subscribe(Arrays.asList("topic_send"));
+
         switch (quarter){
             case 2: {
                 //第一部分，预测的重仓股行业数据
-//                template.send("topic_rec", "20190331");
+                //producer发送
+//                producer.send(new ProducerRecord<String, String>("topic_rec", "endDate", year + "0331"), new Callback() {
+//
+//                    //回调函数，该方法会在Producer收到ack时调用，为异步调用
+//                    @Override
+//                    public void onCompletion(RecordMetadata metadata, Exception exception) {
+//                        if (exception == null) {
+//                            System.out.println("kafka数据发送成功");
+//                        } else {
+//                            System.out.println("kafka数据发送失败");
+//                            exception.printStackTrace();
+//                        }
+//                    }
+//                });
+//                producer.close();
+//                // consumer接收
+//                while (true) {
+//                    ConsumerRecords<String, String> records = consumer.poll(100);
+//                    for (ConsumerRecord<String, String> record : records) {
+//                        System.out.printf("offset = %d, key = %s, value = %s%n",  record.key(), record.value());
+//                    }
+//                }
                 //第二部分，实际重仓股行业数据
                 ArrayList<Industry> industryDataReal = (ArrayList)inSer.selectTop10(year + "0331");
                 map.put("industryDataReal",industryDataReal);
@@ -118,9 +160,38 @@ public class StockController {
                 List<String> stringList = SHSer.selectForNameReal(year + "0331");
                 map.put("realStock",stringList);
                 //第四部分 预测重仓股详细信息
-//                template.send("topic_rec", "20190331");
-                template.send("topic_hkd", "20190331");
-//                consumerTest()
+                //producer发送
+                producer.send(new ProducerRecord<String, String>("topic_rec", "endDate", year + "0331"), new Callback() {
+
+                    //回调函数，该方法会在Producer收到ack时调用，为异步调用
+                    @Override
+                    public void onCompletion(RecordMetadata metadata, Exception exception) {
+                        if (exception == null) {
+                            System.out.println("kafka数据发送成功");
+                        } else {
+                            System.out.println("kafka数据发送失败");
+                            exception.printStackTrace();
+                        }
+                    }
+                });
+                producer.close();
+
+                boolean flag = false;
+                ArrayList<String> list4 = new ArrayList<>();
+                // consumer接收
+                while (true) {
+                    ConsumerRecords<String, String> records = consumer.poll(100);
+                    for (ConsumerRecord<String, String> record : records) {
+                        list4.add(record.value());
+//                        System.out.println(record.value());
+                        if(record.value().equals("END")) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if(flag) break;
+                }
+                map.put("stockDataDetail",list4);
 
                 ReturnType rt = new ReturnType();
                 rt.setCode("200");
