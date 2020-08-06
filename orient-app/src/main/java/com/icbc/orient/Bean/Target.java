@@ -9,6 +9,15 @@ public class Target {
     private double mean2;
     private double std2;
     private double len2;
+    private double corr;
+
+    public void setCorr(double corr) {
+        this.corr = corr;
+    }
+
+    public double getCorr() {
+        return corr;
+    }
 
     public String getTarget() {
         return target;

@@ -3,30 +3,40 @@ package com.icbc.orient.Bean;
 import java.util.List;
 
 public class StockPrice {
+    private String stockCode;
     private String stockName;
-    private List<Double> stockValue;
+    private String tradeDate;
+    private double close;
 
-    public StockPrice(String stockName, List<Double> stockValue) {
-        this.stockName = stockName;
-        this.stockValue = stockValue;
+    public void setClose(double close) {
+        this.close = close;
     }
 
-    public StockPrice() {
-    }
-
-    public String getStockName() {
-        return stockName;
+    public void setStockCode(String stockCode) {
+        this.stockCode = stockCode;
     }
 
     public void setStockName(String stockName) {
         this.stockName = stockName;
     }
 
-    public List<Double> getStockValue() {
-        return stockValue;
+    public void setTradeDate(String tradeDate) {
+        this.tradeDate = tradeDate;
     }
 
-    public void setStockValue(List<Double> stockValue) {
-        this.stockValue = stockValue;
+    public double getClose() {
+        return close;
+    }
+
+    public String getStockCode() {
+        return stockCode;
+    }
+
+    public String getStockName() {
+        return stockName;
+    }
+
+    public String getTradeDate() {
+        return tradeDate;
     }
 }

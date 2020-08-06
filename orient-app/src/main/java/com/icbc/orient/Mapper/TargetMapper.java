@@ -17,7 +17,7 @@ public interface TargetMapper {
 
 
     @Select("SELECT * FROM testDB.contrast_3\n" +
-            "where feature='市盈率TTM' or feature='市净率';")
+            "where feature='市盈率TTM_amax' or feature='市净率_amax';")
     @Results({
             @Result(property = "feature",column = "feature"),
             @Result(property = "target",column = "target"),
@@ -26,12 +26,13 @@ public interface TargetMapper {
             @Result(property = "len1",column = "len_1"),
             @Result(property = "mean2",column = "mean_0"),
             @Result(property = "std2",column = "std_0"),
-            @Result(property = "len2",column = "len_0")
+            @Result(property = "len2",column = "len_0"),
+            @Result(property = "corr",column = "corr")
     })
     List<Target> ValueTarget();
 
     @Select("SELECT * FROM testDB.contrast_3\n" +
-            "where feature='营业收入' or feature='每股收益' or feature='净资产收益率' or feature='总资产净利润率';")
+            "where feature='营业收入' or feature='每股收益' or feature='净资产收益率' or feature='总资产净利率(杜邦分析)';")
     @Results({
             @Result(property = "feature",column = "feature"),
             @Result(property = "target",column = "target"),
@@ -40,12 +41,13 @@ public interface TargetMapper {
             @Result(property = "len1",column = "len_1"),
             @Result(property = "mean2",column = "mean_0"),
             @Result(property = "std2",column = "std_0"),
-            @Result(property = "len2",column = "len_0")
+            @Result(property = "len2",column = "len_0"),
+            @Result(property = "corr",column = "corr")
     })
     List<Target> ProfitTarget();
 
     @Select("SELECT * FROM testDB.contrast_3\n" +
-            "where feature='净资产同比增长率' or feature='净利润同比增长率' or feature='营业收入同比增长率';")
+            "where feature='净资产同比增长率' or feature='净利润同比增长率(单季度)' or feature='营业收入同比增长率';")
     @Results({
             @Result(property = "feature",column = "feature"),
             @Result(property = "target",column = "target"),
@@ -54,12 +56,13 @@ public interface TargetMapper {
             @Result(property = "len1",column = "len_1"),
             @Result(property = "mean2",column = "mean_0"),
             @Result(property = "std2",column = "std_0"),
-            @Result(property = "len2",column = "len_0")
+            @Result(property = "len2",column = "len_0"),
+            @Result(property = "corr",column = "corr")
     })
     List<Target> DevelopTarget();
 
     @Select("SELECT * FROM testDB.contrast_3\n" +
-            "where feature='总市值(万)';")
+            "where feature='总市值(万)_mean';")
     @Results({
             @Result(property = "feature",column = "feature"),
             @Result(property = "target",column = "target"),
@@ -68,7 +71,8 @@ public interface TargetMapper {
             @Result(property = "len1",column = "len_1"),
             @Result(property = "mean2",column = "mean_0"),
             @Result(property = "std2",column = "std_0"),
-            @Result(property = "len2",column = "len_0")
+            @Result(property = "len2",column = "len_0"),
+            @Result(property = "corr",column = "corr")
     })
     List<Target> TotalTarget();
 
