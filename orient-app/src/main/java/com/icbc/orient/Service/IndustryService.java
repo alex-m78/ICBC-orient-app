@@ -1,5 +1,6 @@
 package com.icbc.orient.Service;
 
+import com.icbc.orient.Bean.CAR;
 import com.icbc.orient.Bean.Industry;
 import com.icbc.orient.Mapper.IndustryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,4 +21,6 @@ public class IndustryService {
     public List<Industry> selectTop10(String date){
         return industryMapper.selectTop10(date);
     }
+
+    public List<CAR> getCAR() {return industryMapper.getCAR();}
 }

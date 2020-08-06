@@ -2,36 +2,48 @@ package com.icbc.orient.Bean;
 
 public class CAR {
     private int dayCount;
-    private float car;
-    private float ar;
+    private float newCar;
+    private float newAr;
+    private float oldCar;
+    private float oldAr;
 
-    public CAR(int dayCount,float car,float ar){
-        this.ar=ar;
-        this.car=car;
-        this.dayCount=dayCount;
+    public float getNewAr() {
+        return newAr;
     }
 
-    public void setAr(float ar) {
-        this.ar = ar;
+    public float getNewCar() {
+        return newCar;
     }
 
-    public void setCar(float car) {
-        this.car = car;
+    public float getOldAr() {
+        return oldAr;
+    }
+
+    public float getOldCar() {
+        return oldCar;
+    }
+
+    public int getDayCount() {
+        return dayCount;
     }
 
     public void setDayCount(int dayCount) {
         this.dayCount = dayCount;
     }
 
-    public float getAr() {
-        return ar;
+    public void setNewAr(float newAr) {
+        this.newAr = newAr;
     }
 
-    public float getCar() {
-        return car;
+    public void setNewCar(float newCar) {
+        this.newCar = newCar;
     }
 
-    public int getDayCount() {
-        return dayCount;
+    public void setOldAr(float oldAr) {
+        this.oldAr = oldAr;
+    }
+
+    public void setOldCar(float oldCar) {
+        this.oldCar = oldCar;
     }
 }

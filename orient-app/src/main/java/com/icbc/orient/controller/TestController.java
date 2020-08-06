@@ -75,17 +75,13 @@ public class TestController {
     @ApiOperation("重仓股超额收益率图")
     @GetMapping("/car")
     public ReturnType getCar() {
-        List<CAR> carList = new ArrayList<CAR>(121);
-        ReturnType rt = new ReturnType();
-        for (int i = 0; i < 121; i++) {
-            CAR car = new CAR(i - 60, 0.5f, 0.1f);
-            carList.add(car);
 
-        }
+        ReturnType rt = new ReturnType();
+        List<CAR> result = inSer.getCAR();
         rt.setCode("200");
         rt.setMsg("返回成功");
         rt.setSuccess(true);
-        rt.setResult(carList);
+        rt.setResult(result);
         return rt;
 
 

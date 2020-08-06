@@ -1,5 +1,6 @@
 package com.icbc.orient.Mapper;
 
+import com.icbc.orient.Bean.CAR;
 import com.icbc.orient.Bean.Industry;
 import com.icbc.orient.Bean.StockHold;
 import org.apache.ibatis.annotations.Mapper;
@@ -11,11 +12,13 @@ import java.util.List;
 
 @Mapper
 public interface IndustryMapper {
-    @Select("SELECT * FROM IndustryInfo\n" +
+    @Select("SELECT industry,count(industry) as count \n" +
+            "FROM testDB.display_prediction \n" +
+            "group by industry\n" +
             "order by count\n" +
-            "desc limit 0,5")
+            "desc limit 0,5;")
     @Results({
-            @Result(property = "industryName", column = "industryName"),
+            @Result(property = "industryName", column = "industry"),
             @Result(property = "count", column = "count")
     })
     List<Industry> selectTop5();
@@ -34,4 +37,11 @@ public interface IndustryMapper {
             "ORDER BY count DESC\n" +
             "limit 0,10;")
     List<Industry> selectTop10(String date);
+
+
+    @Select("select * from visualize_CAR_AR")
+    @Results({
+            @Result(property = "dayCount", column = "id")
+    })
+    List<CAR> getCAR();
 }
