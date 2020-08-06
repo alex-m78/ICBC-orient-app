@@ -6,7 +6,13 @@ import com.icbc.orient.Service.IndustryService;
 import com.icbc.orient.Service.StockHoldService;
 import com.icbc.orient.Service.TargetService;
 import io.swagger.annotations.ApiOperation;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.producer.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +27,8 @@ public class StockController {
     private StockHoldService SHSer;
     private TargetService TSer;
     private IndustryService inSer;
+    @Autowired
+    private KafkaTemplate<Object, Object> template;
 
     /**任何人都能访问
      * @return
@@ -47,7 +55,98 @@ public class StockController {
 
     }
 
-    @ApiOperation("预测对比表格接口")
+    @ApiOperation("kafka测试")
+    @GetMapping("/kafkaTest1")
+    public void producerTest() {
+        Properties prop = new Properties();
+        prop.put("bootstrap.servers", "47.103.137.116:9092");//kafka集群，broker-list
+        prop.put("acks", "all");
+        prop.put("retries", 1);//重试次数
+        prop.put("batch.size", 16384);//批次大小
+        prop.put("linger.ms", 1);//等待时间
+        prop.put("buffer.memory", 33554432);//RecordAccumulator缓冲区大小
+        prop.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        prop.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+
+        Producer<String, String> producer = new KafkaProducer<>(prop);
+        for (int i = 0; i < 100; i++) {
+            producer.send(new ProducerRecord<String, String>("first", Integer.toString(i), Integer.toString(i)), new Callback() {
+
+                //回调函数，该方法会在Producer收到ack时调用，为异步调用
+                @Override
+                public void onCompletion(RecordMetadata metadata, Exception exception) {
+                    if (exception == null) {
+                        System.out.println("success->" + metadata.offset());
+                    } else {
+                        exception.printStackTrace();
+                    }
+                }
+            });
+        }
+        producer.close();
+/////////////////////////////////////////////////////////////////////////////////////
+        Properties props = new Properties();
+        props.put("bootstrap.servers", "47.103.137.116:9092");
+        props.put("group.id", "test");//消费者组，只要group.id相同，就属于同一个消费者组
+        props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        consumer.subscribe(Arrays.asList("first"));
+        while (true) {
+            ConsumerRecords<String, String> records = consumer.poll(100);
+            for (ConsumerRecord<String, String> record : records) {
+                System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+            }
+        }
+    }
+
+
+    @ApiOperation("实时计算预测结果")
+    @GetMapping("/newModelResults")
+    public ReturnType getModelResultNew(int year,int quarter){
+        Map<String,Object> map = new HashMap<>();
+        switch (quarter){
+            case 2: {
+                //第一部分，预测的重仓股行业数据
+//                template.send("topic_rec", "20190331");
+                //第二部分，实际重仓股行业数据
+                ArrayList<Industry> industryDataReal = (ArrayList)inSer.selectTop10(year + "0331");
+                map.put("industryDataReal",industryDataReal);
+                //第三部分 对比预测和实际的重仓股名称
+                List<String> compareStockData = SHSer.selectForNamePre(year + "0331");
+                map.put("predictStock",compareStockData);
+                List<String> stringList = SHSer.selectForNameReal(year + "0331");
+                map.put("realStock",stringList);
+                //第四部分 预测重仓股详细信息
+//                template.send("topic_rec", "20190331");
+                template.send("topic_hkd", "20190331");
+//                consumerTest()
+
+                ReturnType rt = new ReturnType();
+                rt.setCode("200");
+                rt.setMsg("返回成功");
+                rt.setSuccess(true);
+                rt.setResult(map);
+                return rt;
+            }
+            case 3:{
+
+            }
+            case 4:{
+
+            }
+            default:{
+                ReturnType rt=new ReturnType();
+                rt.setCode("421");
+                rt.setMsg("数据库没有该数据");
+                rt.setSuccess(true);
+                rt.setResult(null);
+                return rt;
+            }
+        }
+    }
+
+    @ApiOperation("从数据库读预测对比表格接口的数据")
     @GetMapping("/modelResults")
     public ReturnType getModelResult(int year,int quarter){
         Map<String,Object> lists  = new HashMap<>();

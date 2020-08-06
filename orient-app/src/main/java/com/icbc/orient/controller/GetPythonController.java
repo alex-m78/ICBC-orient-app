@@ -27,4 +27,5 @@ public class GetPythonController {
         String string = restTemplate.getForObject(url, String.class, map);
         return JSONObject.parseObject(string);
     }
+
 }

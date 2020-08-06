@@ -36,8 +36,8 @@ public class TestController {
     private StockHoldService stockHoldService;
     private TargetService targetService;
 
-    @Autowired
-    private KafkaTemplate<Object, Object> template;
+//    @Autowired
+//    private KafkaTemplate<Object, Object> template;
 
     /**
      * 任何人都能访问
@@ -88,27 +88,27 @@ public class TestController {
     }
 
 
+//
+//    @ApiOperation("kafka生产者测试")
+//    @GetMapping("/producerTest")
+//    public String producerTest() {
+//
+//        System.out.println("i'm in producer");
+//
+//        this.template.send("topic_rec", "20190331");
+//        return "msg sent";
+//    }
 
-    @ApiOperation("kafka生产者测试")
-    @GetMapping("/producerTest")
-    public String producerTest() {
-
-        System.out.println("i'm in producer");
-
-        this.template.send("topic002", "this is a kafka msg !");
-        return "msg sent";
-    }
-
-    @ApiOperation("kafka消费者测试")
-    @GetMapping("/consumerTest")
-    @KafkaListener(topics = {"topic002"})
-    public String consumerTest(ConsumerRecord<String, String> record) {
-
-        System.out.println("i'm in consumer");
-        System.out.println(record);
-        return "msg recived";
-
-    }
+//    @ApiOperation("kafka消费者测试")
+//    @GetMapping("/consumerTest")
+//    @KafkaListener(topics = {"topic002"})
+//    public String consumerTest(ConsumerRecord<String, String> record) {
+//
+//        System.out.println("i'm in consumer");
+//        System.out.println(record);
+//        return "msg recived";
+//
+//    }
 
     @ApiOperation("首页占比图")
     @GetMapping("/seasonShare")

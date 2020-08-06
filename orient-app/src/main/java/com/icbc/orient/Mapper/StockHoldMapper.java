@@ -62,19 +62,13 @@ public interface StockHoldMapper {
      * @Author: hkd
      * @Date: 2020/7/25 13:28
      */
-    @Select("SELECT name\n" +
-            "from display_prediction\n" +
-            "where end_date = #{date}\n" +
-            "and label_new = 1\n" +
-            "limit 0,30")
-    List<String> selectForNamePre(String date);
+    @Select("SELECT name_predicted name\n" +
+            "from predicted_and_real_${date}")
+    List<String> selectForNamePre(@Param("date") String date);
 
-    @Select("select name\n" +
-            "from train_data_fillna_3\n" +
-            "where end_date = #{date}\n" +
-            "order by total_mv_mean desc\n" +
-            "limit 0,30;")
-    List<String> selectForNameReal(String date);
+    @Select("SELECT name_real name\n" +
+            "from predicted_and_real_${date}")
+    List<String> selectForNameReal(@Param("date") String date);
     /**
      * 功能描述:第二页第四部分显示
      * @Param: []
