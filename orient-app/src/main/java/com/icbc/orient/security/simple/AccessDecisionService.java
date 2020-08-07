@@ -27,7 +27,7 @@ public class AccessDecisionService {
 
         //不需要登录也能访问的(permitAll)
         for (String url : Arrays.asList("/stockHolds","/test","/industries","/car","/stockInfos",
-                "/stockHoldings","/targetCompared","/newModelResults","/fiveStockInfo",
+                "/stockHoldings","/targetCompared","/kafkaResults","/fiveStockInfo",
                 "/register","/seasonShare","/feedBack","/kafkaTest1","/modelResults",
                 "/consumerTest","/producerTest",
                 //swagger部分不需要登录，下面不需要动
