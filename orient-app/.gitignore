@@ -26,7 +26,6 @@ target/
 
 # logs
 /stacktrace.log
-/test/reports
 /logs
 *.log
 *.log.*

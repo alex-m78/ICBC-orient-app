@@ -22,7 +22,7 @@ public interface StockHoldMapper {
     })
     List<StockHold> selectTop10();
 
-    @Select("select *\n" +
+    /*@Select("select *\n" +
             "from stock_information\n" +
             "order by total_worth\n" +
             "desc limit 0,30")
@@ -53,7 +53,7 @@ public interface StockHoldMapper {
             @Result(property = "Compared", column = "compared"),
             @Result(property = "incomeAcc", column = "car"),
     })
-    List<StockHold> selectStockInfo();
+    List<StockHold> selectStockInfo(); */
 
     /**
      * 功能描述:第二页第三部分展示
