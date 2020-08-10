@@ -7,6 +7,7 @@ import com.icbc.orient.Service.IndustryService;
 import com.icbc.orient.Service.StockHoldService;
 import com.icbc.orient.Service.TargetService;
 import io.swagger.annotations.ApiOperation;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -18,6 +19,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Duration;
 import java.util.*;
 
 
@@ -123,6 +125,8 @@ public class StockController {
         props.put("group.id", "test");//消费者组，只要group.id相同，就属于同一个消费者组
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+//        props.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG,"600000");
+//        props.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG,"15000");
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Arrays.asList("topic_send1"));
 
@@ -146,16 +150,20 @@ public class StockController {
 
                 boolean flag = false;
                 String list4 = null;
+                long startTime = System.currentTimeMillis();
                 // consumer接收
                 while (true) {
-                    ConsumerRecords<String, String> records = consumer.poll(100);
+                    ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
                     for (ConsumerRecord<String, String> record : records) {
                         list4 = record.value();
-//                        System.out.println(record.value());
+                        long endTime = System.currentTimeMillis();
+//                        System.out.println(record.value());json字符串java写法
+                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
                         if (list4 != null) {
                             break;
                         }
                     }
+                    System.out.println(list4);
                     if (list4 != null) break;
                 }
                 JSONObject jsonObject = JSON.parseObject(list4);
@@ -186,12 +194,15 @@ public class StockController {
 
                 boolean flag = false;
                 String list4 = null;
+                long startTime = System.currentTimeMillis();
                 // consumer接收
                 while (true) {
-                    ConsumerRecords<String, String> records = consumer.poll(100);
+                    ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
                     for (ConsumerRecord<String, String> record : records) {
                         list4 = record.value();
+                        long endTime = System.currentTimeMillis();
 //                        System.out.println(record.value());
+                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
                         if (list4 != null) {
                             break;
                         }
@@ -226,12 +237,15 @@ public class StockController {
 
                 boolean flag = false;
                 String list4 = null;
+                long startTime = System.currentTimeMillis();
                 // consumer接收
                 while (true) {
-                    ConsumerRecords<String, String> records = consumer.poll(100);
+                    ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
                     for (ConsumerRecord<String, String> record : records) {
                         list4 = record.value();
+                        long endTime = System.currentTimeMillis();
 //                        System.out.println(record.value());
+                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
                         if (list4 != null) {
                             break;
                         }
