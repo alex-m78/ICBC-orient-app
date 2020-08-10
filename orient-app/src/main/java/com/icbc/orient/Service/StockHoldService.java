@@ -18,9 +18,9 @@ public class StockHoldService {
         return stockHoldMapper.selectTop10();
 }
 
-    public List<StockHold> selectHolding(){ return stockHoldMapper.selectHolding();}
+//    public List<StockHold> selectHolding(){ return stockHoldMapper.selectHolding();}
 
-    public List<StockHold> selectHoldInfo(){ return stockHoldMapper.selectStockInfo();}
+//    public List<StockHold> selectHoldInfo(){ return stockHoldMapper.selectStockInfo();}
 
     public List<StockHold> selectHoldingByYearAndQuater(String date){
         return stockHoldMapper.selectHoldingByYearAndQuater(date);

@@ -97,6 +97,37 @@
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
         </dependency>
+<!--        //单元测试需要的依赖-->
+<!--        //https://blog.csdn.net/qq_25635139/article/details/107364459-->
+<!--        <dependency>-->
+
+<!--            <groupId>org.springframework.boot</groupId>-->
+
+<!--            <artifactId>spring-boot-starter-test</artifactId>-->
+
+<!--            <scope>test</scope>-->
+
+<!--            <exclusions>-->
+
+<!--                <exclusion>-->
+
+<!--                    <groupId>org.junit.vintage</groupId>-->
+
+<!--                    <artifactId>junit-vintage-engine</artifactId>-->
+
+<!--                </exclusion>-->
+
+<!--            </exclusions>-->
+
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.3</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -109,8 +140,35 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <skipTests>true</skipTests>
+                    <skipTests>false</skipTests>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.3</version>
+                <configuration>
+                    <includes>
+                        <include>com/**/*</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>pre-test</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+
+                </executions>
             </plugin>
 
 
