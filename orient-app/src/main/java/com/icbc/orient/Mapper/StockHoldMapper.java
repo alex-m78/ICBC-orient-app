@@ -22,38 +22,38 @@ public interface StockHoldMapper {
     })
     List<StockHold> selectTop10();
 
-    /*@Select("select *\n" +
-            "from stock_information\n" +
-            "order by total_worth\n" +
-            "desc limit 0,30")
-    @Results({
-            @Result(property = "symbol", column = "stock_code"),
-            @Result(property = "stockName", column = "stock_name"),
-            @Result(property = "count", column = "hold_count"),
-            @Result(property = "holdScale", column = "hold_scale"),
-            @Result(property = "Compared", column = "compared"),
-            @Result(property = "total", column = "car"),
-            @Result(property = "totalWorth", column = "total_worth"),
-            @Result(property = "netAssert", column = "net_assert"),
-            @Result(property = "netProfit", column = "net_profit"),
-            @Result(property = "pb", column = "pb"),
-            @Result(property = "roe", column = "roe"),
-    })
-    List<StockHold> selectHolding();//选择展示股票信息
+//    @Select("select *\n" +
+//            "from stock_information\n" +
+//            "order by total_worth\n" +
+//            "desc limit 0,30")
+//    @Results({
+//            @Result(property = "symbol", column = "stock_code"),
+//            @Result(property = "stockName", column = "stock_name"),
+//            @Result(property = "count", column = "hold_count"),
+//            @Result(property = "holdScale", column = "hold_scale"),
+//            @Result(property = "Compared", column = "compared"),
+//            @Result(property = "total", column = "car"),
+//            @Result(property = "totalWorth", column = "total_worth"),
+//            @Result(property = "netAssert", column = "net_assert"),
+//            @Result(property = "netProfit", column = "net_profit"),
+//            @Result(property = "pb", column = "pb"),
+//            @Result(property = "roe", column = "roe"),
+//    })
+//    List<StockHold> selectHolding();//选择展示股票信息
 
-    @Select("select stock_code,stock_name,hold_count,hold_scale,compared,car\n" +
-            "from stock_information\n" +
-            "order by total_worth\n" +
-            "desc limit 0,30")
-    @Results({
-            @Result(property = "symbol", column = "stock_code"),
-            @Result(property = "stockName", column = "stock_name"),
-            @Result(property = "count", column = "hold_count"),
-            @Result(property = "holdScale", column = "hold_scale"),
-            @Result(property = "Compared", column = "compared"),
-            @Result(property = "incomeAcc", column = "car"),
-    })
-    List<StockHold> selectStockInfo(); */
+//    @Select("select stock_code,stock_name,hold_count,hold_scale,compared,car\n" +
+//            "from stock_information\n" +
+//            "order by total_worth\n" +
+//            "desc limit 0,30")
+//    @Results({
+//            @Result(property = "symbol", column = "stock_code"),
+//            @Result(property = "stockName", column = "stock_name"),
+//            @Result(property = "count", column = "hold_count"),
+//            @Result(property = "holdScale", column = "hold_scale"),
+//            @Result(property = "Compared", column = "compared"),
+//            @Result(property = "incomeAcc", column = "car"),
+//    })
+//    List<StockHold> selectStockInfo();
 
     /**
      * 功能描述:第二页第三部分展示

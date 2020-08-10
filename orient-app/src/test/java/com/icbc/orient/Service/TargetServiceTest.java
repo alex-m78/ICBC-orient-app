@@ -1,5 +1,6 @@
 package com.icbc.orient.Service;
 
+<<<<<<< HEAD
 import com.icbc.orient.Bean.Target;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,25 +20,47 @@ public class TargetServiceTest {
     public void totalTarget() {
         targetService.TotalTarget();
 
+=======
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+public class TargetServiceTest {
+
+    @Test
+    public void totalTarget() {
+>>>>>>> 359a6a7b535020384a3784b1bcc9409a6b13e6d1
     }
 
     @Test
     public void profitTarget() {
+<<<<<<< HEAD
         targetService.ProfitTarget();
+=======
+>>>>>>> 359a6a7b535020384a3784b1bcc9409a6b13e6d1
     }
 
     @Test
     public void developTarget() {
+<<<<<<< HEAD
         targetService.DevelopTarget();
+=======
+>>>>>>> 359a6a7b535020384a3784b1bcc9409a6b13e6d1
     }
 
     @Test
     public void valueTarget() {
+<<<<<<< HEAD
         targetService.ValueTarget();
+=======
+>>>>>>> 359a6a7b535020384a3784b1bcc9409a6b13e6d1
     }
 
     @Test
     public void storeFeedback() {
+<<<<<<< HEAD
         targetService.StoreFeedback("Test if This feature is ok");
+=======
+>>>>>>> 359a6a7b535020384a3784b1bcc9409a6b13e6d1
     }
 }

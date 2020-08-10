@@ -55,51 +55,51 @@ public class StockController {
         return rt;
 
     }
-    @ApiOperation("kafka测试")
-    @GetMapping("/kafkaTest1")
-    public void producerTest() {
-        Properties prop = new Properties();
-        prop.put("bootstrap.servers", "47.103.137.116:9092");//kafka集群，broker-list
-        prop.put("acks", "all");
-        prop.put("retries", 1);//重试次数
-        prop.put("batch.size", 16384);//批次大小
-        prop.put("linger.ms", 1);//等待时间
-        prop.put("buffer.memory", 33554432);//RecordAccumulator缓冲区大小
-        prop.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        prop.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-
-        Producer<String, String> producer = new KafkaProducer<>(prop);
-        for (int i = 0; i < 100; i++) {
-            producer.send(new ProducerRecord<String, String>("first", Integer.toString(i), Integer.toString(i)), new Callback() {
-
-                //回调函数，该方法会在Producer收到ack时调用，为异步调用
-                @Override
-                public void onCompletion(RecordMetadata metadata, Exception exception) {
-                    if (exception == null) {
-                        System.out.println("kafka数据发送成功");
-                    } else {
-                        System.out.println("kafka数据发送失败");
-                        exception.printStackTrace();
-                    }
-                }
-            });
-        }
-        producer.close();
-/////////////////////////////////////////////////////////////////////////////////////
-        Properties props = new Properties();
-        props.put("bootstrap.servers", "47.103.137.116:9092");
-        props.put("group.id", "test");//消费者组，只要group.id相同，就属于同一个消费者组
-        props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-        consumer.subscribe(Arrays.asList("first"));
-        while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(100);
-            for (ConsumerRecord<String, String> record : records) {
-                System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
-            }
-        }
-    }
+//    @ApiOperation("kafka测试")
+//    @GetMapping("/kafkaTest1")
+//    public void producerTest() {
+//        Properties prop = new Properties();
+//        prop.put("bootstrap.servers", "47.103.137.116:9092");//kafka集群，broker-list
+//        prop.put("acks", "all");
+//        prop.put("retries", 1);//重试次数
+//        prop.put("batch.size", 16384);//批次大小
+//        prop.put("linger.ms", 1);//等待时间
+//        prop.put("buffer.memory", 33554432);//RecordAccumulator缓冲区大小
+//        prop.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+//        prop.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+//
+//        Producer<String, String> producer = new KafkaProducer<>(prop);
+//        for (int i = 0; i < 100; i++) {
+//            producer.send(new ProducerRecord<String, String>("first", Integer.toString(i), Integer.toString(i)), new Callback() {
+//
+//                //回调函数，该方法会在Producer收到ack时调用，为异步调用
+//                @Override
+//                public void onCompletion(RecordMetadata metadata, Exception exception) {
+//                    if (exception == null) {
+//                        System.out.println("kafka数据发送成功");
+//                    } else {
+//                        System.out.println("kafka数据发送失败");
+//                        exception.printStackTrace();
+//                    }
+//                }
+//            });
+//        }
+//        producer.close();
+///////////////////////////////////////////////////////////////////////////////////////
+//        Properties props = new Properties();
+//        props.put("bootstrap.servers", "47.103.137.116:9092");
+//        props.put("group.id", "test");//消费者组，只要group.id相同，就属于同一个消费者组
+//        props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+//        props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+//        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+//        consumer.subscribe(Arrays.asList("first"));
+//        while (true) {
+//            ConsumerRecords<String, String> records = consumer.poll(100);
+//            for (ConsumerRecord<String, String> record : records) {
+//                System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+//            }
+//        }
+//    }
 
 
     @ApiOperation("实时计算预测结果")
