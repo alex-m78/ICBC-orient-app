@@ -5,11 +5,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = OrientApplication.class)
+@SpringBootTest
 public class UserMapperTest {
     @Autowired
     private UserMapper userMapper;
@@ -22,17 +24,20 @@ public class UserMapperTest {
     public void loadAllUser() {
         userMapper.loadAllUser();
     }
-
+    @Transactional
+    @Rollback
     @Test
     public void deleteUser() {
         userMapper.DeleteUser("user");
     }
-
+    @Transactional
+    @Rollback
     @Test
     public void editUserRole() {
         userMapper.editUserRole("user","admin");
     }
-
+    @Transactional
+    @Rollback
     @Test
     public void addUser() {
         userMapper.addUser("user","123456","15888888888");
