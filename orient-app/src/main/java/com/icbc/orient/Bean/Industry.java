@@ -7,10 +7,10 @@ public class Industry {
     public Industry() {
     }
 
-    public Industry(String industryName,int count){
-        this.industryName=industryName;
-        this.count=count;
-    }
+//    public Industry(String industryName,int count){
+//        this.industryName=industryName;
+//        this.count=count;
+//    }
 
     public int getCount() {
         return count;

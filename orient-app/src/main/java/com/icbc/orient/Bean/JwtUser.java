@@ -23,16 +23,16 @@ public class JwtUser implements UserDetails {
     public JwtUser() {
     }
 
-    public JwtUser(String username,String password) {
-        this.username = username;
-        this.password = password;
-    }
+//    public JwtUser(String username,String password) {
+//        this.username = username;
+//        this.password = password;
+//    }
 
-    public JwtUser(String username, String password, String ... roles) {
-        this.username = username;
-        this.password = password;
-        this.authorities= Arrays.stream(roles).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-    }
+//    public JwtUser(String username, String password, String ... roles) {
+//        this.username = username;
+//        this.password = password;
+//        this.authorities= Arrays.stream(roles).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+//    }
 
 
 

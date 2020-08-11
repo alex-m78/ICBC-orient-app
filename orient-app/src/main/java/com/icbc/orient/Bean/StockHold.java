@@ -19,20 +19,20 @@ public class StockHold {
 
     public StockHold(){};
 
-    public StockHold(String stockName,String symbol,int count){
-        this.count=count;
-        this.stockName=stockName;
-        this.symbol=symbol;
-    }
-
-    public StockHold(String symbol,String stockName,int count,int holdScale,float Compared,int total){
-        this.count=count;
-        this.stockName=stockName;
-        this.symbol=symbol;
-        this.Compared=Compared;
-        this.total=total;
-        this.holdScale=holdScale;
-    }
+//    public StockHold(String stockName,String symbol,int count){
+//        this.count=count;
+//        this.stockName=stockName;
+//        this.symbol=symbol;
+//    }
+//
+//    public StockHold(String symbol,String stockName,int count,int holdScale,float Compared,int total){
+//        this.count=count;
+//        this.stockName=stockName;
+//        this.symbol=symbol;
+//        this.Compared=Compared;
+//        this.total=total;
+//        this.holdScale=holdScale;
+//    }
 
 
 
@@ -98,25 +98,25 @@ public class StockHold {
         this.symbol = symbol;
     }
 
-    public void setCompared(float compared) {
-        Compared = compared;
-    }
+//    public void setCompared(float compared) {
+//        Compared = compared;
+//    }
 
-    public void setHoldScale(int holdScale) {
-        this.holdScale = holdScale;
-    }
+//    public void setHoldScale(int holdScale) {
+//        this.holdScale = holdScale;
+//    }
 
-    public void setTotal(int total) {
-        this.total = total;
-    }
+//    public void setTotal(int total) {
+//        this.total = total;
+//    }
 
     public void setNetAssert(double netAssert) {
         this.netAssert = netAssert;
     }
 
-    public void setNetProfit(double netProfit) {
-        this.netProfit = netProfit;
-    }
+//    public void setNetProfit(double netProfit) {
+//        this.netProfit = netProfit;
+//    }
 
     public void setPb(double pb) {
         this.pb = pb;
