@@ -32,9 +32,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         response.setContentType("application/json;charset=UTF-8");
         String userJsonStr = JSON.toJSONString(authentication.getPrincipal());
-        String username=authentication.getName();
         String token = JwtHelper.encode(userJsonStr, signer).getEncoded();
-        //JwtUser role=userDetailsService.loadUserByUsername(username)
         ReturnType rt=new ReturnType();
         rt.setCode("200");
         rt.setMsg("登录成功");
@@ -43,7 +41,6 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         Object role= it.next();
         String result=role.toString();
         rt.setResult(result);
-        //rt.setResult(authentication.getAuthorities());
         String success=JSON.toJSONString(rt);
         response.setHeader("Access-Control-Expose-Headers","Token");
         response.setHeader("Token", token);

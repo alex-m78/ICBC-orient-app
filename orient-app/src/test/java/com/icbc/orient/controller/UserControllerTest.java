@@ -33,23 +33,27 @@ public class UserControllerTest {
     @Test
     public void register() throws Exception {
         mockMvc.perform(get("/register?username=Wangyibo9&password=1234567&phone=18264839534")).andDo(print());
+        mockMvc.perform(get("/register?username=Wangyibo10&password=1234567&phone=12354683131")).andDo(print());
     }
     @Transactional
     @Rollback
     @Test
     public void userDelete() throws Exception {
         mockMvc.perform(get("/userDelete?username=user123124")).andDo(print());
+        mockMvc.perform(get("/userDelete?username=nonExist")).andDo(print());
     }
     @Transactional
     @Rollback
     @Test
     public void userRole() throws Exception {
         mockMvc.perform(get("/userRole?username=Wangyibo&role=user")).andDo(print());
+        mockMvc.perform(get("/userRole?username=NonExist&role=user")).andDo(print());
     }
     @Transactional
     @Rollback
     @Test
     public void userInfo() throws Exception {
         mockMvc.perform(get("/userInfo")).andDo(print());
+
     }
 }
