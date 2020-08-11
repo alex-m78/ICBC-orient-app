@@ -4,8 +4,7 @@ public class Industry {
     private String industryName;
     private int count;
 
-    public Industry() {
-    }
+
 
 //    public Industry(String industryName,int count){
 //        this.industryName=industryName;

@@ -42,7 +42,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         authenticatedToken.setDetails(jwtLoginToken.getDetails());
         return authenticatedToken;
     }
-
+/*
     /**这个provider支持哪种凭证(token)的认证*/
     @Override
     public boolean supports(Class<?> authentication) {

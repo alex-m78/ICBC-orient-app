@@ -20,8 +20,7 @@ public class JwtUser implements UserDetails {
     private String phone;@ApiModelProperty("手机号码")
     private List<SimpleGrantedAuthority> authorities;
 
-    public JwtUser() {
-    }
+
 
 //    public JwtUser(String username,String password) {
 //        this.username = username;

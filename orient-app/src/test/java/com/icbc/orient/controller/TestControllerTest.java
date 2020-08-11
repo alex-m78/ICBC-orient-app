@@ -27,6 +27,7 @@ public class TestControllerTest {
     public void setUp(){
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
+
     @Test
     public void getIndustry() throws Exception {
         mockMvc.perform(get("/industries")).andDo(print());
