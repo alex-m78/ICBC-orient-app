@@ -158,7 +158,7 @@ public class StockController {
                         list4 = record.value();
                         long endTime = System.currentTimeMillis();
 //                        System.out.println(record.value());json字符串java写法
-                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
+//                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
                         if (list4 != null) {
                             break;
                         }
@@ -202,7 +202,7 @@ public class StockController {
                         list4 = record.value();
                         long endTime = System.currentTimeMillis();
 //                        System.out.println(record.value());
-                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
+//                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
                         if (list4 != null) {
                             break;
                         }
@@ -245,7 +245,7 @@ public class StockController {
                         list4 = record.value();
                         long endTime = System.currentTimeMillis();
 //                        System.out.println(record.value());
-                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
+//                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
                         if (list4 != null) {
                             break;
                         }
@@ -280,7 +280,7 @@ public class StockController {
         switch (quarter){
             case 2 : {
                 //第二页第二部分数据
-                industryDataReal = (ArrayList)inSer.selectTop10(year + "0630");
+                industryDataReal = (ArrayList)inSer.selectTop10(year + "0331");
                 lists.put("industryDataReal",industryDataReal);
 
                 ReturnType rt = new ReturnType();
@@ -292,7 +292,7 @@ public class StockController {
             }
             case 3 : {
                 //第二页第二部分数据
-                industryDataReal = (ArrayList)inSer.selectTop10(year + "0930");
+                industryDataReal = (ArrayList)inSer.selectTop10(year + "0630");
                 lists.put("industryDataReal",industryDataReal);
 
                 ReturnType rt=new ReturnType();
@@ -304,7 +304,7 @@ public class StockController {
             }
             case 4 : {
                 //第二页第二部分数据
-                industryDataReal = (ArrayList)inSer.selectTop10(year + "1231");
+                industryDataReal = (ArrayList)inSer.selectTop10(year + "0930");
                 lists.put("industryDataReal",industryDataReal);
 
                 ReturnType rt=new ReturnType();
@@ -383,6 +383,17 @@ public class StockController {
         List<StockPrice> list4=inSer.stockPrice4();
         List<StockPrice> list5=inSer.stockPrice5();
         List<Object> result =Arrays.asList(list1,list2,list3,list4,list5);
+        /*JSONObject jsonObject = new JSONObject();
+        List<Double> list1  = Arrays.asList(1500.0,1600.0,1700.0,1660.0,1800.0);
+        jsonObject.put("stockOne",new StockPrice("贵州茅台",list1));
+        List<Double> list2  = Arrays.asList(180.0,190.0,200.0,160.0,1800.0);
+        jsonObject.put("stockTwo",new StockPrice("泸州老窖",list2));
+        List<Double> list3  = Arrays.asList(8.0,8.5,9.0,8.9,9.6);
+        jsonObject.put("stockThree",new StockPrice("宗申动力",list3));
+        List<Double> list4  = Arrays.asList(10.4,9.8,9.9,9.98,10.22);
+        jsonObject.put("stockFour",new StockPrice("炬华科技",list4));
+        List<Double> list5  = Arrays.asList(13.97,13.82,13.48,13.70,13.71);
+        jsonObject.put("stockFive",new StockPrice("浙江美大",list5)); */
 
         ReturnType rt=new ReturnType();
         rt.setCode("200");
