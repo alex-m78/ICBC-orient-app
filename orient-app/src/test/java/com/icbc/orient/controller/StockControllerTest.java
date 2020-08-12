@@ -38,8 +38,8 @@ public class StockControllerTest {
     public void getModelResultNew() throws Exception {
         mockMvc.perform(get("/kafkaResults?year=2019&quarter=1")).andReturn();
         mockMvc.perform(get("/kafkaResults?year=2019&quarter=2")).andReturn();
-//        mockMvc.perform(get("/kafkaResults?year=2019&quarter=3")).andReturn();
-//        mockMvc.perform(get("/kafkaResults?year=2019&quarter=4")).andReturn();
+       mockMvc.perform(get("/kafkaResults?year=2019&quarter=3")).andReturn();
+       mockMvc.perform(get("/kafkaResults?year=2019&quarter=4")).andReturn();
     }
 
     @Test

@@ -48,4 +48,10 @@ public class TestControllerTest {
     public void feedBack() throws Exception {
         mockMvc.perform(get("/feedBack?msg=Feed back test no")).andDo(print());
     }
+    @Transactional
+    @Rollback
+    @Test
+    public void feedBack1() throws Exception {
+        mockMvc.perform(get("/feedBack?msg=")).andDo(print());
+    }
 }
