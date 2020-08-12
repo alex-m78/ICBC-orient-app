@@ -107,21 +107,9 @@ public class StockController {
 //        }
 //    }
     {
-        Properties prop = new Properties();
-        prop.put("bootstrap.servers", "47.103.137.116:9092");//kafka集群，broker-list
-        prop.put("acks", "all");
-        prop.put("retries", 1);//重试次数
-        prop.put("batch.size", 16384);//批次大小
-        prop.put("linger.ms", 1);//等待时间
-        prop.put("buffer.memory", 33554432);//RecordAccumulator缓冲区大小
-        prop.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        prop.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-
-        producer = new KafkaProducer<>(prop);
-
         Properties props = new Properties();
         props.put("bootstrap.servers", "47.103.137.116:9092");
-        props.put("group.id", "test4");//消费者组，只要group.id相同，就属于同一个消费者组
+        props.put("group.id", "test6");//消费者组，只要group.id相同，就属于同一个消费者组
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         //        props.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG,"600000");
@@ -133,7 +121,19 @@ public class StockController {
     @ApiOperation("实时计算预测结果")
     @GetMapping("/kafkaResults")
     public ReturnType getModelResultNew(int year,int quarter) {
+        Properties prop = new Properties();
+        prop.put("bootstrap.servers", "47.103.137.116:9092");//kafka集群，broker-list
+        prop.put("acks", "all");
+        prop.put("retries", 1);//重试次数
+        prop.put("batch.size", 16384);//批次大小
+        prop.put("linger.ms", 1);//等待时间
+        prop.put("buffer.memory", 33554432);//RecordAccumulator缓冲区大小
+        prop.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        prop.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        producer = new KafkaProducer<>(prop);
+
         switch (quarter) {
+
             case 2: {
                 //producer发送
                 producer.send(new ProducerRecord<String, String>("topic_rec2", "endDate", year + "0331"), new Callback() {
