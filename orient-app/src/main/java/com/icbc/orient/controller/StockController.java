@@ -163,7 +163,7 @@ public class StockController {
                             break;
                         }
                     }
-                    System.out.println(list4);
+                    System.out.println("kafka接受到数据: " + list4);
                     if (list4 != null) break;
                 }
                 JSONObject jsonObject = JSON.parseObject(list4);
@@ -207,6 +207,7 @@ public class StockController {
                             break;
                         }
                     }
+                    System.out.println("kafka接受到数据: " + list4);
                     if (list4 != null) break;
                 }
                 JSONObject jsonObject = JSON.parseObject(list4);
@@ -250,6 +251,7 @@ public class StockController {
                             break;
                         }
                     }
+                    System.out.println("kafka接受到数据: " + list4);
                     if (list4 != null) break;
                 }
                 JSONObject jsonObject = JSON.parseObject(list4);
