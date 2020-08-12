@@ -30,6 +30,10 @@ public class StockController {
     private StockHoldService SHSer;
     private TargetService TSer;
     private IndustryService inSer;
+
+    Producer<String, String> producer;
+    KafkaConsumer<String, String> consumer;
+
 //    @Autowired
 //    private KafkaTemplate<Object, Object> template;
 
@@ -102,12 +106,21 @@ public class StockController {
 //            }
 //        }
 //    }
-
+    {
+        Properties props = new Properties();
+        props.put("bootstrap.servers", "47.103.137.116:9092");
+        props.put("group.id", "test6");//消费者组，只要group.id相同，就属于同一个消费者组
+        props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        //        props.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG,"600000");
+    //        props.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG,"15000");
+        consumer = new KafkaConsumer<>(props);
+        consumer.subscribe(Arrays.asList("topic_send2"));
+    }
 
     @ApiOperation("实时计算预测结果")
     @GetMapping("/kafkaResults")
     public ReturnType getModelResultNew(int year,int quarter) {
-        Map<String, Object> map = new HashMap<>();
         Properties prop = new Properties();
         prop.put("bootstrap.servers", "47.103.137.116:9092");//kafka集群，broker-list
         prop.put("acks", "all");
@@ -117,23 +130,13 @@ public class StockController {
         prop.put("buffer.memory", 33554432);//RecordAccumulator缓冲区大小
         prop.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         prop.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-
-        Producer<String, String> producer = new KafkaProducer<>(prop);
-
-        Properties props = new Properties();
-        props.put("bootstrap.servers", "47.103.137.116:9092");
-        props.put("group.id", "test");//消费者组，只要group.id相同，就属于同一个消费者组
-        props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-//        props.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG,"600000");
-//        props.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG,"15000");
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-        consumer.subscribe(Arrays.asList("topic_send1"));
+        producer = new KafkaProducer<>(prop);
 
         switch (quarter) {
+
             case 2: {
                 //producer发送
-                producer.send(new ProducerRecord<String, String>("topic_rec1", "endDate", year + "0331"), new Callback() {
+                producer.send(new ProducerRecord<String, String>("topic_rec2", "endDate", year + "0331"), new Callback() {
 
                     //回调函数，该方法会在Producer收到ack时调用，为异步调用
                     @Override
@@ -150,20 +153,20 @@ public class StockController {
 
                 boolean flag = false;
                 String list4 = null;
-                long startTime = System.currentTimeMillis();
+//                long startTime = System.currentTimeMillis();
                 // consumer接收
                 while (true) {
                     ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
                     for (ConsumerRecord<String, String> record : records) {
                         list4 = record.value();
-                        long endTime = System.currentTimeMillis();
+//                        long endTime = System.currentTimeMillis();
 //                        System.out.println(record.value());json字符串java写法
 //                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
                         if (list4 != null) {
                             break;
                         }
                     }
-                    System.out.println(list4);
+                    System.out.println("kafka接受到数据: " + list4);
                     if (list4 != null) break;
                 }
                 JSONObject jsonObject = JSON.parseObject(list4);
@@ -177,7 +180,7 @@ public class StockController {
             }
             case 3: {
                 //producer发送
-                producer.send(new ProducerRecord<String, String>("topic_rec1", "endDate", year + "0630"), new Callback() {
+                producer.send(new ProducerRecord<String, String>("topic_rec2", "endDate", year + "0630"), new Callback() {
 
                     //回调函数，该方法会在Producer收到ack时调用，为异步调用
                     @Override
@@ -194,19 +197,20 @@ public class StockController {
 
                 boolean flag = false;
                 String list4 = null;
-                long startTime = System.currentTimeMillis();
+//                long startTime = System.currentTimeMillis();
                 // consumer接收
                 while (true) {
                     ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
                     for (ConsumerRecord<String, String> record : records) {
                         list4 = record.value();
-                        long endTime = System.currentTimeMillis();
+//                        long endTime = System.currentTimeMillis();
 //                        System.out.println(record.value());
 //                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
                         if (list4 != null) {
                             break;
                         }
                     }
+                    System.out.println("kafka接受到数据: " + list4);
                     if (list4 != null) break;
                 }
                 JSONObject jsonObject = JSON.parseObject(list4);
@@ -220,7 +224,7 @@ public class StockController {
             }
             case 4: {
                 //producer发送
-                producer.send(new ProducerRecord<String, String>("topic_rec1", "endDate", year + "0930"), new Callback() {
+                producer.send(new ProducerRecord<String, String>("topic_rec2", "endDate", year + "0930"), new Callback() {
 
                     //回调函数，该方法会在Producer收到ack时调用，为异步调用
                     @Override
@@ -237,19 +241,20 @@ public class StockController {
 
                 boolean flag = false;
                 String list4 = null;
-                long startTime = System.currentTimeMillis();
+//                long startTime = System.currentTimeMillis();
                 // consumer接收
                 while (true) {
                     ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
                     for (ConsumerRecord<String, String> record : records) {
                         list4 = record.value();
-                        long endTime = System.currentTimeMillis();
+//                        long endTime = System.currentTimeMillis();
 //                        System.out.println(record.value());
 //                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
                         if (list4 != null) {
                             break;
                         }
                     }
+                    System.out.println("kafka接受到数据: " + list4);
                     if (list4 != null) break;
                 }
                 JSONObject jsonObject = JSON.parseObject(list4);
