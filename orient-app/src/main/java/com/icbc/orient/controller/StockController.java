@@ -128,12 +128,12 @@ public class StockController {
 //        props.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG,"600000");
 //        props.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG,"15000");
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-        consumer.subscribe(Arrays.asList("topic_send1"));
+        consumer.subscribe(Arrays.asList("topic_send2"));
 
         switch (quarter) {
             case 2: {
                 //producer发送
-                producer.send(new ProducerRecord<String, String>("topic_rec1", "endDate", year + "0331"), new Callback() {
+                producer.send(new ProducerRecord<String, String>("topic_rec2", "endDate", year + "0331"), new Callback() {
 
                     //回调函数，该方法会在Producer收到ack时调用，为异步调用
                     @Override
@@ -150,13 +150,13 @@ public class StockController {
 
                 boolean flag = false;
                 String list4 = null;
-                long startTime = System.currentTimeMillis();
+//                long startTime = System.currentTimeMillis();
                 // consumer接收
                 while (true) {
                     ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
                     for (ConsumerRecord<String, String> record : records) {
                         list4 = record.value();
-                        long endTime = System.currentTimeMillis();
+//                        long endTime = System.currentTimeMillis();
 //                        System.out.println(record.value());json字符串java写法
 //                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
                         if (list4 != null) {
@@ -177,7 +177,7 @@ public class StockController {
             }
             case 3: {
                 //producer发送
-                producer.send(new ProducerRecord<String, String>("topic_rec1", "endDate", year + "0630"), new Callback() {
+                producer.send(new ProducerRecord<String, String>("topic_rec2", "endDate", year + "0630"), new Callback() {
 
                     //回调函数，该方法会在Producer收到ack时调用，为异步调用
                     @Override
@@ -194,13 +194,13 @@ public class StockController {
 
                 boolean flag = false;
                 String list4 = null;
-                long startTime = System.currentTimeMillis();
+//                long startTime = System.currentTimeMillis();
                 // consumer接收
                 while (true) {
                     ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
                     for (ConsumerRecord<String, String> record : records) {
                         list4 = record.value();
-                        long endTime = System.currentTimeMillis();
+//                        long endTime = System.currentTimeMillis();
 //                        System.out.println(record.value());
 //                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
                         if (list4 != null) {
@@ -221,7 +221,7 @@ public class StockController {
             }
             case 4: {
                 //producer发送
-                producer.send(new ProducerRecord<String, String>("topic_rec1", "endDate", year + "0930"), new Callback() {
+                producer.send(new ProducerRecord<String, String>("topic_rec2", "endDate", year + "0930"), new Callback() {
 
                     //回调函数，该方法会在Producer收到ack时调用，为异步调用
                     @Override
@@ -238,13 +238,13 @@ public class StockController {
 
                 boolean flag = false;
                 String list4 = null;
-                long startTime = System.currentTimeMillis();
+//                long startTime = System.currentTimeMillis();
                 // consumer接收
                 while (true) {
                     ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
                     for (ConsumerRecord<String, String> record : records) {
                         list4 = record.value();
-                        long endTime = System.currentTimeMillis();
+//                        long endTime = System.currentTimeMillis();
 //                        System.out.println(record.value());
 //                        if(endTime - startTime > 1000) list4 = "{\'error\': 'timeout'}";
                         if (list4 != null) {
