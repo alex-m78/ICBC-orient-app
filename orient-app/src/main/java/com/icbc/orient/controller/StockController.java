@@ -109,7 +109,7 @@ public class StockController {
     {
         Properties props = new Properties();
         props.put("bootstrap.servers", "47.103.137.116:9092");
-        props.put("group.id", "test6");//消费者组，只要group.id相同，就属于同一个消费者组
+        props.put("group.id", "test");//消费者组，只要group.id相同，就属于同一个消费者组
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         //        props.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG,"600000");

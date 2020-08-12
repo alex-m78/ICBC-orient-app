@@ -14,10 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class JwtAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     /**供根据用户名查询用户,获取UserDetails的方法*/
-    private UserDetailsService userDetailsService;
+    public UserDetailsService userDetailsService;
     @Autowired
     /**提供加密方式,密码验证时,需要加密后进行对比*/
-    private PasswordEncoder passwordEncoder;
+    public PasswordEncoder passwordEncoder;
 
 
     /** 认证提供者进行认证,注意这里传入的authentication对象,是JwtLoginFilter里调用

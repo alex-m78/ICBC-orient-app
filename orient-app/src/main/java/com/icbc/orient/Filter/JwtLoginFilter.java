@@ -2,6 +2,7 @@ package com.icbc.orient.Filter;
 
 import com.icbc.orient.security.simple.JwtLoginToken;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -32,10 +33,11 @@ public class JwtLoginFilter extends AbstractAuthenticationProcessingFilter {
             //AuthenticationManager获取受支持的AuthenticationProvider(这里也就是JwtAuthenticationProvider),
             //生成已认证的凭证,此时凭证中的主体为userDetails
             Authentication authenticatedToken = this.getAuthenticationManager().authenticate(jwtLoginToken);
+            //System.out.println(authenticatedToken);
             return authenticatedToken;
         }catch (Exception e){
-            //throw new BadCredentialsException("坏的凭证");
-            return null;
+            throw new BadCredentialsException("坏的凭证");
+
         }
     }
 

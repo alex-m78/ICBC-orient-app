@@ -31,8 +31,8 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         response.setContentType("application/json;charset=UTF-8");
+
         String userJsonStr = JSON.toJSONString(authentication.getPrincipal());
-        String token = JwtHelper.encode(userJsonStr, signer).getEncoded();
         ReturnType rt=new ReturnType();
         rt.setCode("200");
         rt.setMsg("登录成功");
@@ -42,6 +42,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         String result=role.toString();
         rt.setResult(result);
         String success=JSON.toJSONString(rt);
+        String token = JwtHelper.encode(userJsonStr, signer).getEncoded();
         response.setHeader("Access-Control-Expose-Headers","Token");
         response.setHeader("Token", token);
         response.getWriter().write(success);

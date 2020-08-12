@@ -35,6 +35,7 @@ public class AccessDecisionServiceTest {
         Method method = access.getDeclaredMethod("queryUrlByUserRole",String.class);
         method.setAccessible(true);
         method.invoke(instance,"admin");
+        method.invoke(instance,"user");
 
     }
 }

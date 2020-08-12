@@ -45,6 +45,13 @@ public class UserControllerTest {
     @Transactional
     @Rollback
     @Test
+    public void userDelete1() throws Exception {
+
+        mockMvc.perform(get("/userDelete?username=user1111")).andDo(print());
+    }
+    @Transactional
+    @Rollback
+    @Test
     public void userRole() throws Exception {
         mockMvc.perform(get("/userRole?username=Wangyibo&role=user")).andDo(print());
         mockMvc.perform(get("/userRole?username=NonExist&role=user")).andDo(print());
