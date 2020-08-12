@@ -142,7 +142,7 @@ public class StockController {
                     @Override
                     public void onCompletion(RecordMetadata metadata, Exception exception) {
                         if (exception == null) {
-                            System.out.println("kafka数据发送成功");
+                            System.out.println("kafka数据发送成功,请求" + year + "年" + quarter + "季度数据");
                         } else {
                             System.out.println("kafka数据发送失败");
                             exception.printStackTrace();
@@ -169,14 +169,23 @@ public class StockController {
                     System.out.println("kafka接受到数据: " + list4);
                     if (list4 != null) break;
                 }
-                JSONObject jsonObject = JSON.parseObject(list4);
+                if(list4.equals("null")){
+                    ReturnType rt = new ReturnType();
+                    rt.setCode("422");
+                    rt.setMsg("无法预测");
+                    rt.setSuccess(false);
+                    rt.setResult(null);
+                    return rt;
+                }else{
+                    JSONObject jsonObject = JSON.parseObject(list4);
 
-                ReturnType rt = new ReturnType();
-                rt.setCode("200");
-                rt.setMsg("返回成功");
-                rt.setSuccess(true);
-                rt.setResult(jsonObject);
-                return rt;
+                    ReturnType rt = new ReturnType();
+                    rt.setCode("200");
+                    rt.setMsg("返回成功");
+                    rt.setSuccess(true);
+                    rt.setResult(jsonObject);
+                    return rt;
+                }
             }
             case 3: {
                 //producer发送
@@ -186,7 +195,7 @@ public class StockController {
                     @Override
                     public void onCompletion(RecordMetadata metadata, Exception exception) {
                         if (exception == null) {
-                            System.out.println("kafka数据发送成功");
+                            System.out.println("kafka数据发送成功,请求" + year + "年" + quarter + "季度数据");
                         } else {
                             System.out.println("kafka数据发送失败");
                             exception.printStackTrace();
@@ -213,14 +222,23 @@ public class StockController {
                     System.out.println("kafka接受到数据: " + list4);
                     if (list4 != null) break;
                 }
-                JSONObject jsonObject = JSON.parseObject(list4);
+                if(list4.equals("null")){
+                    ReturnType rt = new ReturnType();
+                    rt.setCode("422");
+                    rt.setMsg("无法预测");
+                    rt.setSuccess(false);
+                    rt.setResult(null);
+                    return rt;
+                }else{
+                    JSONObject jsonObject = JSON.parseObject(list4);
 
-                ReturnType rt = new ReturnType();
-                rt.setCode("200");
-                rt.setMsg("返回成功");
-                rt.setSuccess(true);
-                rt.setResult(jsonObject);
-                return rt;
+                    ReturnType rt = new ReturnType();
+                    rt.setCode("200");
+                    rt.setMsg("返回成功");
+                    rt.setSuccess(true);
+                    rt.setResult(jsonObject);
+                    return rt;
+                }
             }
             case 4: {
                 //producer发送
@@ -230,7 +248,7 @@ public class StockController {
                     @Override
                     public void onCompletion(RecordMetadata metadata, Exception exception) {
                         if (exception == null) {
-                            System.out.println("kafka数据发送成功");
+                            System.out.println("kafka数据发送成功,请求" + year + "年" + quarter + "季度数据");
                         } else {
                             System.out.println("kafka数据发送失败");
                             exception.printStackTrace();
@@ -257,20 +275,29 @@ public class StockController {
                     System.out.println("kafka接受到数据: " + list4);
                     if (list4 != null) break;
                 }
-                JSONObject jsonObject = JSON.parseObject(list4);
+                if(list4.equals("null")){
+                    ReturnType rt = new ReturnType();
+                    rt.setCode("422");
+                    rt.setMsg("无法预测");
+                    rt.setSuccess(false);
+                    rt.setResult(null);
+                    return rt;
+                }else{
+                    JSONObject jsonObject = JSON.parseObject(list4);
 
-                ReturnType rt = new ReturnType();
-                rt.setCode("200");
-                rt.setMsg("返回成功");
-                rt.setSuccess(true);
-                rt.setResult(jsonObject);
-                return rt;
+                    ReturnType rt = new ReturnType();
+                    rt.setCode("200");
+                    rt.setMsg("返回成功");
+                    rt.setSuccess(true);
+                    rt.setResult(jsonObject);
+                    return rt;
+                }
             }
             default: {
                 ReturnType rt = new ReturnType();
-                rt.setCode("421");
-                rt.setMsg("数据库没有该数据");
-                rt.setSuccess(true);
+                rt.setCode("422");
+                rt.setMsg("无法预测");
+                rt.setSuccess(false);
                 rt.setResult(null);
                 return rt;
             }
