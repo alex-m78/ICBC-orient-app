@@ -30,6 +30,10 @@ public class StockController {
     private StockHoldService SHSer;
     private TargetService TSer;
     private IndustryService inSer;
+
+    Producer<String, String> producer;
+    KafkaConsumer<String, String> consumer;
+
 //    @Autowired
 //    private KafkaTemplate<Object, Object> template;
 
@@ -102,12 +106,7 @@ public class StockController {
 //            }
 //        }
 //    }
-
-
-    @ApiOperation("实时计算预测结果")
-    @GetMapping("/kafkaResults")
-    public ReturnType getModelResultNew(int year,int quarter) {
-        Map<String, Object> map = new HashMap<>();
+    {
         Properties prop = new Properties();
         prop.put("bootstrap.servers", "47.103.137.116:9092");//kafka集群，broker-list
         prop.put("acks", "all");
@@ -118,18 +117,22 @@ public class StockController {
         prop.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         prop.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
-        Producer<String, String> producer = new KafkaProducer<>(prop);
+        producer = new KafkaProducer<>(prop);
 
         Properties props = new Properties();
         props.put("bootstrap.servers", "47.103.137.116:9092");
-        props.put("group.id", "test2");//消费者组，只要group.id相同，就属于同一个消费者组
+        props.put("group.id", "test4");//消费者组，只要group.id相同，就属于同一个消费者组
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-//        props.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG,"600000");
-//        props.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG,"15000");
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        //        props.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG,"600000");
+    //        props.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG,"15000");
+        consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Arrays.asList("topic_send2"));
+    }
 
+    @ApiOperation("实时计算预测结果")
+    @GetMapping("/kafkaResults")
+    public ReturnType getModelResultNew(int year,int quarter) {
         switch (quarter) {
             case 2: {
                 //producer发送
