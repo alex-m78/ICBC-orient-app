@@ -1,5 +1,6 @@
 package com.icbc.orient.Service;
 
+import com.icbc.orient.Bean.MetaData;
 import com.icbc.orient.Bean.Target;
 import com.icbc.orient.Mapper.TargetMapper;
 import org.apache.ibatis.annotations.Insert;
@@ -25,4 +26,12 @@ public class TargetService {
     public List<Target> ValueTarget(){return targetMapper.ValueTarget();};
 
     public boolean StoreFeedback(String msg){return targetMapper.StoreFeedback(msg);};
+
+    public List<String> getFeedBacks(){
+        return  targetMapper.getFeedBack();
+    }
+
+    public MetaData getMetaData(String date,String name){
+        return targetMapper.getMetaData(date,name);
+    }
 }

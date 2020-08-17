@@ -29,7 +29,7 @@ public class AccessDecisionService {
         for (String url : Arrays.asList("/stockHolds","/test","/industries","/car","/stockInfos",
                 "/stockHoldings","/targetCompared","/kafkaResults","/fiveStockInfo",
                 "/register","/seasonShare","/feedBack","/kafkaTest1","/modelResults",
-                "/consumerTest","/producerTest",
+                "/consumerTest","/producerTest","/feedBacks","/metaData",
                 //swagger部分不需要登录，下面不需要动
                 "/swagger-ui.html","/v2/**","/swagger-resources/**","/webjars/**")) {
             if (antPathMatcher.match(url, request.getRequestURI())) {

@@ -7,6 +7,7 @@ import com.icbc.orient.Service.StockHoldService;
 import com.icbc.orient.Service.TargetService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -144,6 +145,67 @@ public class TestController {
         return rt;
 
     }
+    @ApiOperation("获取所有的反馈")
+    @GetMapping("/feedBacks")
+    public List<String> feedBack(){
+        List<String> list = new ArrayList<>();
+        list = targetService.getFeedBacks();
+        return list;
+    }
 
+    @ApiOperation("获取原始数据")
+    @GetMapping("/metaData")
+    public ReturnType getMetaData(String year,int quarter,String name){
+        switch (quarter){
+            case 2:
+            {
+                MetaData metaData = targetService.getMetaData(year + "0630", name);
+                ReturnType rt = new ReturnType();
+                rt.setCode("200");
+                rt.setMsg("请求成功");
+                rt.setSuccess(true);
+                rt.setResult(metaData);
+                return rt;
+            }
+            case 3:
+            {
+                MetaData metaData = targetService.getMetaData(year + "0930", name);
+                ReturnType rt = new ReturnType();
+                rt.setCode("200");
+                rt.setMsg("请求成功");
+                rt.setSuccess(true);
+                rt.setResult(metaData);
+                return rt;
+            }
+            case 4:
+            {
+                MetaData metaData = targetService.getMetaData(year + "1231", name);
+                ReturnType rt = new ReturnType();
+                rt.setCode("200");
+                rt.setMsg("请求成功");
+                rt.setSuccess(true);
+                rt.setResult(metaData);
+                return rt;
+            }
+            case 1:
+            {
+                MetaData metaData = targetService.getMetaData(year + "0331", name);
+                ReturnType rt = new ReturnType();
+                rt.setCode("200");
+                rt.setMsg("请求成功");
+                rt.setSuccess(true);
+                rt.setResult(metaData);
+                return rt;
+            }
+            default:{
+                ReturnType rt = new ReturnType();
+                rt.setCode("421");
+                rt.setMsg("没有该数据");
+                rt.setSuccess(true);
+                rt.setResult(null);
+                return rt;
+            }
+        }
+    }
 }
 

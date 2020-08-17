@@ -40,4 +40,14 @@ public class TargetMapperTest {
     public void storeFeedback() {
         targetMapper.StoreFeedback("6666");
     }
+
+    @Test
+    public void getFeedBack() {
+        targetMapper.getFeedBack();
+    }
+
+    @Test
+    public void getMetaData() {
+        System.out.println(targetMapper.getMetaData("20190630","平安银行"));
+    }
 }

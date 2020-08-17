@@ -52,4 +52,14 @@ public class TargetServiceTest {
         targetService.StoreFeedback("Test if This feature is ok");
 
     }
+
+    @Test
+    public void getFeedBacks() {
+        targetService.getFeedBacks();
+    }
+
+    @Test
+    public void getMetaData() {
+        System.out.println(targetService.getMetaData("20190630","平安银行"));
+    }
 }

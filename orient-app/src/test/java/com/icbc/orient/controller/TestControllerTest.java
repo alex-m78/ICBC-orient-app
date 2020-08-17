@@ -54,4 +54,14 @@ public class TestControllerTest {
     public void feedBack1() throws Exception {
         mockMvc.perform(get("/feedBack?msg=")).andDo(print());
     }
+
+    @Test
+    public void testFeedBack() throws Exception {
+        mockMvc.perform(get("/feedBacks")).andDo(print());
+    }
+
+    @Test
+    public void getMetaData() throws Exception {
+        mockMvc.perform(get("/metaData?year=2019&quarter=2&name=贵州茅台")).andDo(print());
+    }
 }

@@ -1,8 +1,10 @@
 package com.icbc.orient.Mapper;
 
 import com.icbc.orient.Bean.Industry;
+import com.icbc.orient.Bean.MetaData;
 import com.icbc.orient.Bean.Target;
 import org.apache.ibatis.annotations.*;
+import org.apache.kafka.common.protocol.types.Field;
 
 import java.util.List;
 @Mapper
@@ -81,7 +83,12 @@ public interface TargetMapper {
     @Insert("insert into testDB.FeedBack(feedBack) values(#{msg})")
     Boolean StoreFeedback(String msg);
 
+    @Select("SELECT feedBack FROM `FeedBack`")
+    List<String> getFeedBack();
 
-
-
+    @Select("SELECT * \n" +
+            "FROM `train_data_3`\n" +
+            "where end_date = #{date}\n" +
+            "and name = #{name}")
+    MetaData getMetaData(@Param("date") String date,@Param("name") String name);
 }
