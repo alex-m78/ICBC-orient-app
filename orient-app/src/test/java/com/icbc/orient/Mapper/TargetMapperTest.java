@@ -50,4 +50,10 @@ public class TargetMapperTest {
     public void getMetaData() {
         System.out.println(targetMapper.getMetaData("20190630","平安银行"));
     }
+    @Transactional
+    @Rollback
+    @Test
+    public void deleteFeedBack() {
+        targetMapper.deleteFeedBack(322);
+    }
 }

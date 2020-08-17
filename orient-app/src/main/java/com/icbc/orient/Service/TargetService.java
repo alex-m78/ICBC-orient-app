@@ -32,6 +32,10 @@ public class TargetService {
         return  targetMapper.getFeedBack();
     }
 
+    public void deleteFeedBack(long id){
+        targetMapper.deleteFeedBack(id);
+    }
+
     public MetaData getMetaData(String date,String name){
         return targetMapper.getMetaData(date,name);
     }

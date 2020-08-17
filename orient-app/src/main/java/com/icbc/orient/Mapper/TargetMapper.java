@@ -84,8 +84,13 @@ public interface TargetMapper {
     @Insert("insert into testDB.FeedBack(feedBack,name) values(#{msg},#{name})")
     Boolean StoreFeedback(@Param("msg") String msg,@Param("name")String name);
 
-    @Select("SELECT feedBack,name FROM `FeedBack`")
+    @Select("SELECT * FROM `FeedBack`")
     List<FeedBack> getFeedBack();
+
+    @Delete("DELETE from FeedBack\n" +
+            "where idnew_table = #{id}")
+    void deleteFeedBack(long id);
+
 
     @Select("SELECT * \n" +
             "FROM `train_data_3`\n" +

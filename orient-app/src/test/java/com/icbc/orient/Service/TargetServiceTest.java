@@ -62,4 +62,10 @@ public class TargetServiceTest {
     public void getMetaData() {
         System.out.println(targetService.getMetaData("20190630","平安银行"));
     }
+    @Transactional
+    @Rollback
+    @Test
+    public void deleteFeedBack() {
+        targetService.deleteFeedBack(322);
+    }
 }

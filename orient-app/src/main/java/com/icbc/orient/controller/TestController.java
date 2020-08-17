@@ -5,11 +5,14 @@ import com.icbc.orient.Service.IndustryService;
 import com.icbc.orient.Service.JwtUserService;
 import com.icbc.orient.Service.StockHoldService;
 import com.icbc.orient.Service.TargetService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -152,6 +155,11 @@ public class TestController {
         List<FeedBack> list = new ArrayList<>();
         list = targetService.getFeedBacks();
         return list;
+    }
+    @ApiOperation("根据id删除反馈")
+    @DeleteMapping("/feedBack")
+    public void deleteFeedBack(long id){
+        targetService.deleteFeedBack(id);
     }
 
     @ApiOperation("获取原始数据")

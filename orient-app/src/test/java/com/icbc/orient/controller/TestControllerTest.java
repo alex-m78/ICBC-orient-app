@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -63,5 +64,11 @@ public class TestControllerTest {
     @Test
     public void getMetaData() throws Exception {
         mockMvc.perform(get("/metaData?year=2019&quarter=2&name=贵州茅台")).andDo(print());
+    }
+    @Transactional
+    @Rollback
+    @Test
+    public void deleteFeedBack() throws Exception {
+        mockMvc.perform(delete("/deleteFeedBack?id=322")).andDo(print());
     }
 }
