@@ -1,5 +1,6 @@
 package com.icbc.orient.Mapper;
 
+import com.icbc.orient.Bean.FeedBack;
 import com.icbc.orient.Bean.Industry;
 import com.icbc.orient.Bean.MetaData;
 import com.icbc.orient.Bean.Target;
@@ -80,11 +81,11 @@ public interface TargetMapper {
 
 
 
-    @Insert("insert into testDB.FeedBack(feedBack) values(#{msg})")
-    Boolean StoreFeedback(String msg);
+    @Insert("insert into testDB.FeedBack(feedBack,name) values(#{msg},#{name})")
+    Boolean StoreFeedback(@Param("msg") String msg,@Param("name")String name);
 
-    @Select("SELECT feedBack FROM `FeedBack`")
-    List<String> getFeedBack();
+    @Select("SELECT feedBack,name FROM `FeedBack`")
+    List<FeedBack> getFeedBack();
 
     @Select("SELECT * \n" +
             "FROM `train_data_3`\n" +

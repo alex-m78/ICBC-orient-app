@@ -49,7 +49,7 @@ public class TargetServiceTest {
     @Test
     public void storeFeedback() {
 
-        targetService.StoreFeedback("Test if This feature is ok");
+        targetService.StoreFeedback("Test if This feature is ok","hhh");
 
     }
 

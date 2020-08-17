@@ -8,6 +8,7 @@ import com.icbc.orient.Service.TargetService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.ibatis.annotations.Select;
+import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -128,11 +129,11 @@ public class TestController {
 
     @ApiOperation("用户意见反馈")
     @GetMapping("/feedBack")
-    public ReturnType FeedBack(@ApiParam("前端发来的用户反馈，进行储存")String msg) {
+    public ReturnType FeedBack(@ApiParam("前端发来的用户反馈，进行储存")String msg,String name) {
 
         ReturnType rt = new ReturnType();
         rt.setResult(null);
-        boolean result=targetService.StoreFeedback(msg);
+        boolean result=targetService.StoreFeedback(msg,name);
         if(result){
             rt.setCode("200");
             rt.setMsg("意见反馈成功");
@@ -147,8 +148,8 @@ public class TestController {
     }
     @ApiOperation("获取所有的反馈")
     @GetMapping("/feedBacks")
-    public List<String> feedBack(){
-        List<String> list = new ArrayList<>();
+    public List<FeedBack> feedBack(){
+        List<FeedBack> list = new ArrayList<>();
         list = targetService.getFeedBacks();
         return list;
     }

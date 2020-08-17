@@ -38,7 +38,7 @@ public class TargetMapperTest {
     @Rollback
     @Test
     public void storeFeedback() {
-        targetMapper.StoreFeedback("6666");
+        targetMapper.StoreFeedback("6666","111");
     }
 
     @Test
