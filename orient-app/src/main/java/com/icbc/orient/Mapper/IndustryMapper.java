@@ -28,6 +28,14 @@ public interface IndustryMapper {
     })
     List<Industry> selectTop5();
 
+    @Select("SELECT * \n" +
+            "FROM visualize_industry \n")
+    @Results({
+            @Result(property = "industryName", column = "industry"),
+            @Result(property = "count", column = "count")
+    })
+    List<Industry> select();
+
     /**
      * 功能描述:返回实际重仓股行业数据，只返回前5数据
      * @Param: []

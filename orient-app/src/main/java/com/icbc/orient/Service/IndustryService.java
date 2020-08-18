@@ -19,6 +19,12 @@ public class IndustryService {
 
     }
 
+    public List<Industry> select(){
+
+        return industryMapper.select();
+
+    }
+
     public List<Industry> selectTop10(String date){
         return industryMapper.selectTop10(date);
     }

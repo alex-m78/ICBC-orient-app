@@ -65,7 +65,7 @@ public class TestController {
     public ReturnType getIndustry() {
         List<Industry> industryList = new ArrayList<Industry>(5);
 
-        industryList = inSer.selectTop5();
+        industryList = inSer.select();
 
         ReturnType rt = new ReturnType();
         rt.setCode("200");
