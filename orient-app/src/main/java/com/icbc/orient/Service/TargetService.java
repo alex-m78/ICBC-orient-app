@@ -22,9 +22,12 @@ public class TargetService {
     */
 
     public List<Target> TotalTarget(){return targetMapper.TotalTarget();};
-    public List<Target> ProfitTarget(){return targetMapper.ProfitTarget();};
     public List<Target> DevelopTarget(){return targetMapper.DevelopTarget();};
     public List<Target> ValueTarget(){return targetMapper.ValueTarget();};
+    public List<Target> TaxTarget(){return targetMapper.TaxTarget();};
+    public List<Target> OperationTarget(){return targetMapper.OperationTarget();};
+    public List<Target> CashTarget(){return targetMapper.CashTarget();};
+    public List<Target> ProfitTarget(){return targetMapper.ProfitTarget();};
 
     public boolean StoreFeedback(String msg,String name){return targetMapper.StoreFeedback(msg,name);};
 

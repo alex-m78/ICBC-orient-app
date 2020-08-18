@@ -368,32 +368,56 @@ public class StockController {
         List<Target> DevelopTarget=TSer.DevelopTarget();
         List<Target> ValueTarget=TSer.ValueTarget();
         List<Target> ProfitTarget=TSer.ProfitTarget();
+        List<Target> TaxTarget=TSer.TaxTarget();
+        List<Target> CashTarget=TSer.CashTarget();
+        List<Target> OperationTarget=TSer.OperationTarget();
 
-        for(int i=0;i<1;i++)
+        for(int i=0;i<2;i++)
         {
             Target targets=TotalTarget.get(i);
             targets.setTarget("公司规模");
         }
+
         for(int i=0;i<3;i++)
         {
             Target targets=DevelopTarget.get(i);
-            targets.setTarget("发展能力");
+            targets.setTarget("资本扩张");
         }
-        for(int i=0;i<2;i++)
+
+        for(int i=0;i<6;i++)
         {
             Target targets=ValueTarget.get(i);
-            targets.setTarget("价值比率");
+            targets.setTarget("市场指标");
         }
-        for(int i=0;i<4;i++)
+
+        for(int i=0;i<5;i++)
         {
             Target targets=ProfitTarget.get(i);
             targets.setTarget("盈利能力");
         }
 
+        for(int i=0;i<2;i++)
+        {
+            Target targets=OperationTarget.get(i);
+            targets.setTarget("营运能力");
+        }
+
+        for(int i=0;i<2;i++)
+        {
+            Target targets=TaxTarget.get(i);
+            targets.setTarget("税收");
+        }
+
+        for(int i=0;i<1;i++)
+        {
+            Target targets=CashTarget.get(i);
+            targets.setTarget("现金流量");
+        }
 
 
 
-        List<Object> result =Arrays.asList(TotalTarget,DevelopTarget,ValueTarget,ProfitTarget);
+
+        List<Object> result =Arrays.asList(TotalTarget,DevelopTarget,ValueTarget,ProfitTarget,TaxTarget,OperationTarget,CashTarget);
 
 
         ReturnType rt=new ReturnType();
