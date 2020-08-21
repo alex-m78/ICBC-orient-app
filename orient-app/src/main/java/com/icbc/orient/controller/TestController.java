@@ -130,9 +130,9 @@ public class TestController {
 
     }
 
-    @ApiOperation("用户意见反馈")
+    @ApiOperation("前端发来的用户反馈，进行储存")
     @GetMapping("/feedBack")
-    public ReturnType FeedBack(@ApiParam("前端发来的用户反馈，进行储存")String msg,String name) {
+    public ReturnType FeedBack(String msg,String name) {
 
         ReturnType rt = new ReturnType();
         rt.setResult(null);
